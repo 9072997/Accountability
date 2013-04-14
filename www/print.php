@@ -15,8 +15,16 @@
 	</head> 
 	<body onload="window.print()"> 
 		<?php
-			$students = db('SELECT `id`, `class`, `name`, `code` FROM `student`');
+			if(empty($_GET['id'])) {
+				$students = db('SELECT `id`, `class`, `name`, `code` FROM `student`');
+			} else {
+				$students = db('SELECT `id`, `name`, `code` FROM `student` WHERE `class` = ?', $_GET['id']);
+				$class = $_GET['id'];
+			}
 			foreach($students as $student) {
+				if(empty($_GET['id'])) {
+					$class = $student->class;
+				}
 				$period = db1('SELECT `first`, `last` FROM `period` WHERE `id` = ?', thisPeriod());
 				echo "
 					<div class=\"page\">
@@ -24,7 +32,7 @@
 						<h3>Grades: $period->first - $period->last</h3>
 						<ul>
 				";
-				$subjects = db('SELECT `id`, `name` FROM `subject` WHERE `class` = ?', $student->class);
+				$subjects = db('SELECT `id`, `name` FROM `subject` WHERE `class` = ?', $class);
 				foreach($subjects as $subject) {
 					$percentage = round(averageSubject($student->id, $subject->id, thisPeriod()) * 100);
 					echo "

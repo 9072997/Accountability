@@ -58,6 +58,7 @@
 						?>
 					</tbody>
 				</table>
+				<a href="print.php?id=<?php echo $_GET['id']; ?>" data-role="button" data-ajax="false">Print</a>
 			</div>
 			
 			<div data-role="footer">
