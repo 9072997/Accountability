@@ -13,7 +13,7 @@
 			}
 		</style>
 	</head> 
-	<body> 
+	<body onload="window.print()"> 
 		<?php
 			$students = db('SELECT `id`, `class`, `name`, `code` FROM `student`');
 			foreach($students as $student) {
