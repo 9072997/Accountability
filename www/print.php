@@ -33,7 +33,7 @@
 						</li>
 					";
 				}
-				$demerits = db('SELECT `note`, `points` FROM `demerit` WHERE `student` = ?', $student->id);
+				$demerits = db('SELECT `note`, `date`, `points` FROM `demerit` WHERE `student` = ?', $student->id);
 				echo "</ul>";
 				if(empty($demerits)) {
 					echo "<h3>Demerits</h3>None";
@@ -45,7 +45,7 @@
 					foreach($demerits as $demerit) {
 						echo "
 							<li>
-								$demerit->note ($demerit->points)
+								$demerit->note ($demerit->points points on $demerit->date)
 							</li>
 						";
 					}

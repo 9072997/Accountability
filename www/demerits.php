@@ -23,12 +23,12 @@
 			<div data-role="content">
 				<ul data-role="listview" data-filter="true">
 					<?php
-						$demerits = db('SELECT `id`, `note`, `points` FROM `demerit` WHERE `student` = ?', $_GET['id']);
+						$demerits = db('SELECT `id`, `date`, `note`, `points` FROM `demerit` WHERE `student` = ?', $_GET['id']);
 						foreach($demerits as $demerit) {
 							echo "
 								<li>
 									<a href=\"demerit.php?id=$demerit->id&source=demerits.php?id={$_GET['id']}\" data-rel=\"dialog\" data-prefetch>
-										$demerit->note
+										$demerit->note ($demerit->date)
 										<span class=\"ui-li-count\">$demerit->points</span>
 									</a>
 								</li>

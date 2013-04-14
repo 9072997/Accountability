@@ -23,11 +23,11 @@
 			<div data-role="content">
 				<ul data-role="listview" data-filter="true">
 					<?php
-						$demerits = db('SELECT `id`, `note`, `points` FROM `demerit` WHERE `student` = ?', $student->id);
+						$demerits = db('SELECT `id`, `date`, `note`, `points` FROM `demerit` WHERE `student` = ?', $student->id);
 						foreach($demerits as $demerit) {
 							echo "
 								<li>
-									$demerit->note
+									$demerit->note ($demerit->date)
 									<span class=\"ui-li-count\">$demerit->points</span>
 								</li>
 							";

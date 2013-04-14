@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `grade` (
 CREATE TABLE IF NOT EXISTS `demerit` (
 	`id` int unsigned NOT NULL AUTO_INCREMENT,
 	`student` int unsigned DEFAULT NULL,
+	`date` date DEFAULT NULL,
 	`note` text DEFAULT NULL,
 	`points` int DEFAULT NULL,
 	FOREIGN KEY (`student`) REFERENCES student(`id`) ON UPDATE CASCADE ON DELETE SET NULL,

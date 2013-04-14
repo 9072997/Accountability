@@ -4,7 +4,7 @@
 	if(empty($_GET['id'])) {
 		$studentId = $_GET['student'];
 	} else {
-		$demerit = db1('SELECT `student`, `note`, `points` FROM `demerit` WHERE `id` = ?', $_GET['id']);
+		$demerit = db1('SELECT `student`, `date`, `note`, `points` FROM `demerit` WHERE `id` = ?', $_GET['id']);
 		$studentId = $demerit->student;
 	}
 	$student = db1('SELECT `name` FROM `student` WHERE `id` = ?', $studentId);
@@ -36,6 +36,10 @@
 							echo "<input type=\"hidden\" name=\"id\" value=\"{$_GET['id']}\" />";
 						}
 					?>
+					<div data-role="fieldcontain">
+						<label for="date">Date:</label>
+						<input type="date" name="date" id="date" value="<?php if(!empty($demerit->date)) { echo $demerit->date; } else { echo date("Y-m-d"); } ?>" />
+					</div>
 					<div data-role="fieldcontain">
 						<label for="points">Points:</label>
 						<input type="number" name="points" id="points" value="<?php if(!empty($demerit->points)) { echo $demerit->points; } ?>" />
