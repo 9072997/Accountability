@@ -19,11 +19,12 @@
 				<a href="class.php?id=<?php echo $student->class; ?>" data-dom-cache="false" data-icon="check">Students</a>
 				<h1><?php echo $student->name; ?> (<?php
 					if(empty($student->code)) {
-						echo getHumanPassword();
+						$code = getHumanPassword();
 						db0('UPDATE `student` SET `code` = ? WHERE `id` = ?', $code, $student->id);
 					} else {
-						echo $student->code;
+						$code = $student->code;
 					}
+					echo $code;
 				?>)</h1>
 				<a href="demerits.php?id=<?php echo $_GET['id'] ?>" data-prefetch>Demerits</a>
 			</div>
