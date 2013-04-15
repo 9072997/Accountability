@@ -13,9 +13,6 @@
 			}
 		}
 	} else { // new grade
-		$date = date("Y-m-d");
-		$period = db1('SELECT `id` FROM `period` WHERE `first` < ? AND `last` > ?', $date, $date)->id;
-		
 		db0('INSERT INTO `grade` (`assignment`, `student`, `note`, `points`) VALUES (?, ?, ?, ?)', post('assignment'), post('student'), post('note'), post('points'));
 	}
 ?>

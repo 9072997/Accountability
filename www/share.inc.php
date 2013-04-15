@@ -84,7 +84,7 @@
 	
 	function thisPeriod() {
 		$today = date("Y-m-d");
-		return db1('SELECT `id` FROM `period` WHERE `first` < ? AND `last` > ?', $today, $today)->id;
+		return db1('SELECT `id` FROM `period` WHERE `first` <= ? AND `last` => ?', $today, $today)->id;
 	}
 	
 	if(!empty($_POST['api'])) {
