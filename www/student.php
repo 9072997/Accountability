@@ -20,7 +20,7 @@
 				<h1><?php echo $student->name; ?> (<?php
 					if(empty($student->code)) {
 						$code = getHumanPassword();
-						db0('UPDATE `student` SET `code` = ? WHERE `id` = ?', $code, $student->id);
+						db0('UPDATE `student` SET `code` = ? WHERE `id` = ?', $code, $_GET['id']);
 					} else {
 						$code = $student->code;
 					}
