@@ -14,29 +14,33 @@
 	
 	$dbObject = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8", $dbUser, $dbPassword);
 	
-	function db($sql) {
+	function dbQuery($sql, $prams) { // caches perpared statements
 		global $dbObject;
+		global $dbQueries;
+		if(!isset($dbQueries[$sql])) {
+			$dbQueries[$sql] = $dbObject->prepare($sql);
+		}
+		$dbQueries[$sql]->execute($prams) or die($dbQueries[$sql]->errorInfo()[2]);
+		return $dbQueries[$sql];
+	}
+	
+	function db($sql) {
 		$prams = func_get_args();
 		array_shift($prams);
-		$query = $dbObject->prepare($sql);
-		$query->execute($prams) or die($query->errorInfo()[2]);
+		$query = dbQuery($sql, $prams);
 		return $query->fetchAll(PDO::FETCH_OBJ);
 	}
 	
 	function db0($sql) {
-		global $dbObject;
 		$prams = func_get_args();
 		array_shift($prams);
-		$query = $dbObject->prepare($sql);
-		$query->execute($prams) or die($query->errorInfo()[2]);
+		$query = dbQuery($sql, $prams);
 	}
 	
 	function db1($sql) {
-		global $dbObject;
 		$prams = func_get_args();
 		array_shift($prams);
-		$query = $dbObject->prepare($sql);
-		$query->execute($prams) or die($query->errorInfo()[2]);
+		$query = dbQuery($sql, $prams);
 		return $query->fetchObject();
 	}
 	
