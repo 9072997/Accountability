@@ -1,6 +1,6 @@
 <?php
 	$dbServer = 'localhost';
-	$dbUser = 'root';
+	$dbUser = 'accountability';
 	$dbPassword = 'CHANGEME';
 	$dbName = 'accountability';
 	
