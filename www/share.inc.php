@@ -12,7 +12,7 @@
 		}
 	}
 	
-	$dbObject = new PDO("pgsql:host=$dbServer;dbname=$dbName;charset=utf8", $dbUser, $dbPassword);
+	$dbObject = new PDO("pgsql:host=$dbServer;dbname=$dbName", $dbUser, $dbPassword);
 	
 	function dbQuery($sql, $prams) { // caches perpared statements
 		global $dbObject;
