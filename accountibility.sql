@@ -23,7 +23,7 @@ CREATE TABLE "section" (
 	"id" serial PRIMARY KEY,
 	"subject" integer DEFAULT NULL,
 	"name" varchar(100) DEFAULT NULL,
-	"point" integer DEFAULT NULL,
+	"points" integer DEFAULT NULL,
 	FOREIGN KEY ("subject") REFERENCES subject("id") ON UPDATE CASCADE ON DELETE SET NULL
 );
 
@@ -39,7 +39,7 @@ CREATE TABLE "assignment" (
 	"period" integer DEFAULT NULL,
 	"name" varchar(100) DEFAULT NULL,
 	"note" text DEFAULT NULL,
-	"point" integer DEFAULT NULL,
+	"points" integer DEFAULT NULL,
 	FOREIGN KEY ("section") REFERENCES section("id") ON UPDATE CASCADE ON DELETE SET NULL,
 	FOREIGN KEY ("period") REFERENCES period("id") ON UPDATE CASCADE ON DELETE SET NULL
 );
@@ -49,7 +49,7 @@ CREATE TABLE "grade" (
 	"assignment" integer DEFAULT NULL,
 	"student" integer DEFAULT NULL,
 	"note" text DEFAULT NULL,
-	"point" integer DEFAULT NULL,
+	"points" integer DEFAULT NULL,
 	FOREIGN KEY ("assignment") REFERENCES assignment("id") ON UPDATE CASCADE ON DELETE SET NULL,
 	FOREIGN KEY ("student") REFERENCES student("id") ON UPDATE CASCADE ON DELETE SET NULL
 );
@@ -59,6 +59,6 @@ CREATE TABLE "demerit" (
 	"student" integer DEFAULT NULL,
 	"date" date DEFAULT NULL,
 	"note" text DEFAULT NULL,
-	"point" integer DEFAULT NULL,
+	"points" integer DEFAULT NULL,
 	FOREIGN KEY ("student") REFERENCES student("id") ON UPDATE CASCADE ON DELETE SET NULL
 );
