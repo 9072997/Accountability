@@ -41,11 +41,11 @@
 									echo "<li data-role=\"list-divider\">$subject->name - $section->name</li>";
 									foreach($assignments as $assignment) {
 										$grade = db1('SELECT `id`, `points` FROM `grade` WHERE `assignment` = ? AND `student` = ?', $assignment->id, $_GET['id']);
-										if(!empty($grade)) {
-											$percentage = is_null($grade->points) ? '?' : $grade->points / $assignment->points * 100;
-											echo "<li><a href=\"grade.php?id=$grade->id&source=student.php?id={$_GET['id']}\" data-rel=\"dialog\" data-prefetch>$assignment->name: $grade->points/$assignment->points ($percentage%)</a></li>";
-										} else {
+										if(empty($grade)) {
 											echo "<li><a href=\"grade.php?assignment=$assignment->id&student={$_GET['id']}&source=student.php?id={$_GET['id']}\" data-rel=\"dialog\" data-prefetch>$assignment->name</a></li>";
+										} else {
+											$percentage = is_null($grade->points) ? '?' : $grade->points / $assignment->points * 100;
+											echo "<li><a href=\"grade.php?id=$grade->id&source=student.php?id={$_GET['id']}\" data-rel=\"dialog\" data-dom-cache=\"false\">$assignment->name: $grade->points/$assignment->points ($percentage%)</a></li>";
 										}
 									}
 								}

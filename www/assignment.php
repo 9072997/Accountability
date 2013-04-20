@@ -32,7 +32,7 @@
 								$id = mt_rand();
 								echo "
 									<li data-role=\"fieldcontain\">
-										<label for=\"$id\"><a href=\"grade.php?assignment={$_GET['id']}&student=$student->id&source=assignment.php?id={$_GET['id']}\" data-rel=\"dialog\" data-role=\"button\" data-mini=\"true\" data-dom-cache=\"false\">$student->name</a></label>
+										<label for=\"$id\"><a href=\"grade.php?assignment={$_GET['id']}&student=$student->id&source=assignment.php?id={$_GET['id']}\" data-rel=\"dialog\" data-role=\"button\" data-mini=\"true\"  data-dom-cache=\"false\">$student->name</a></label>
 										<input type=\"number\" id=\"$id\" min=\"0\" max=\"$assignment->points\" onchange=\"$.post('grade.api.php', 'assignment={$_GET['id']}&student=$student->id&points=' + this.value)\" />
 									</li>
 								";

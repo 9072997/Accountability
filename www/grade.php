@@ -4,6 +4,7 @@
 	if(empty($_GET['id'])) {
 		$assignmentId = $_GET['assignment'];
 		$studentId = $_GET['student'];
+		$grade = db1('SELECT `note`, `points` FROM `grade` WHERE `assignment` = ? AND `student` = ?', $assignmentId, $studentId);
 	} else {
 		$grade = db1('SELECT `assignment`, `student`, `note`, `points` FROM `grade` WHERE `id` = ?', $_GET['id']);
 		$assignmentId = $grade->assignment;
@@ -33,7 +34,7 @@
 				<form action="<?php echo $_GET['source']; ?>" method="post">
 					<input type="hidden" name="api" value="grade" />
 					<?php
-						if(empty($_GET['id'])) {
+						if(empty($grade)) {
 							echo "<input type=\"hidden\" name=\"assignment\" value=\"{$_GET['assignment']}\" />";
 							echo "<input type=\"hidden\" name=\"student\" value=\"{$_GET['student']}\" />";
 						} else {
@@ -51,7 +52,7 @@
 					<input type="submit" value="Submit" />
 				</form>
 				<?php
-					if(!empty($_GET['id'])) {
+					if(!empty($grade)) {
 						echo "
 							<form action=\"{$_GET['source']}\" method=\"post\">
 								<input type=\"hidden\" name=\"api\" value=\"grade\" />
