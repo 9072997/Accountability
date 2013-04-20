@@ -1,8 +1,8 @@
 <?php
 	include_once('share.inc.php');
 	include_once('auth.inc.php');
-	$students = db('SELECT `id`, `name` FROM `student` WHERE `class` = ?', $_GET['id']);
-	$title = 'Class of ' . db1('SELECT `graduate` from `class` WHERE `id` = ?', $_GET['id'])->graduate;
+	$students = db('SELECT "id", "name" FROM "student" WHERE "class" = ?', $_GET['id']);
+	$title = 'Class of ' . db1('SELECT "graduate" from "class" WHERE "id" = ?', $_GET['id'])->graduate;
 ?>
 <!DOCTYPE html> 
 <html>
@@ -25,11 +25,11 @@
 			<div data-role="content">
 				<ul data-role="listview" data-filter="true">
 					<?php
-						$subjects = db('SELECT `id`, `name` FROM `subject` WHERE `class` = ?', $_GET['id']);
+						$subjects = db('SELECT "id", "name" FROM "subject" WHERE "class" = ?', $_GET['id']);
 						foreach($subjects as $subject) {
-							$sections = db('SELECT `id`, `name` FROM `section` WHERE `subject` = ?', $subject->id);
+							$sections = db('SELECT "id", "name" FROM "section" WHERE "subject" = ?', $subject->id);
 							foreach($sections as $section) {
-								$assignments = db('SELECT `id`, `name`, `points` FROM `assignment` WHERE `section` = ? AND `period` = ?', $section->id, thisPeriod());
+								$assignments = db('SELECT "id", "name", "points" FROM "assignment" WHERE "section" = ? AND "period" = ?', $section->id, thisPeriod());
 								if(count($assignments)) {
 									echo "<li data-role=\"list-divider\">$subject->name - $section->name</li>";
 									foreach($assignments as $assignment) {
@@ -47,7 +47,7 @@
 								<?php
 									foreach($subjects as $subject) {
 										echo "<optgroup label=\"$subject->name\">";
-										$sections = db('SELECT `id`, `name` FROM `section` WHERE `subject` = ?', $subject->id);
+										$sections = db('SELECT "id", "name" FROM "section" WHERE "subject" = ?', $subject->id);
 										foreach($sections as $section) {
 											echo "<option value=\"$section->id\">$subject->name - $section->name</option>";
 										}

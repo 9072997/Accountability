@@ -5,11 +5,11 @@
 		$subject = $_GET['subject'];
 		$sectionName = "New Section";
 	} else {
-		$section = db1('select `subject`, `name`, `points` FROM `section` WHERE `id` = ?', $_GET['id']);
+		$section = db1('select "subject", "name", "points" FROM "section" WHERE "id" = ?', $_GET['id']);
 		$subject = $section->subject;
 		$sectionName = $section->name;
 	}
-	$title = "$sectionName (" . db1('SELECT `name` from `subject` WHERE `id` = ?', $subject)->name . ')';
+	$title = "$sectionName (" . db1('SELECT "name" from "subject" WHERE "id" = ?', $subject)->name . ')';
 	$formUrl = "subject.php?id=$subject";
 ?>
 <!DOCTYPE html>

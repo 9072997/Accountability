@@ -12,7 +12,7 @@
 		}
 	}
 	
-	$dbObject = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8", $dbUser, $dbPassword);
+	$dbObject = new PDO("pgsql:host=$dbServer;dbname=$dbName;charset=utf8", $dbUser, $dbPassword);
 	
 	function dbQuery($sql, $prams) { // caches perpared statements
 		global $dbObject;
@@ -51,13 +51,13 @@
 	}
 	
 	function averageSection($student, $section, $period) {
-		$grades = db('SELECT `assignment`, `points` FROM `grade` WHERE `student` = ? AND `assignment` IN (SELECT `id` FROM `assignment` WHERE `section` = ? AND `period` = ?)', $student, $section, $period);
+		$grades = db('SELECT "assignment", "points" FROM "grade" WHERE "student" = ? AND "assignment" IN (SELECT "id" FROM "assignment" WHERE "section" = ? AND "period" = ?)', $student, $section, $period);
 		$points = 0;
 		$possible = 0;
 		foreach($grades as $grade) {
 			if(!is_null($grade->points)) {
 				$points += $grade->points;
-				$possible += db1('SELECT `points` FROM `assignment` WHERE `id` = ?', $grade->assignment)->points;
+				$possible += db1('SELECT "points" FROM "assignment" WHERE "id" = ?', $grade->assignment)->points;
 			}
 		}
 		if($possible == 0) {
@@ -68,7 +68,7 @@
 	}
 	
 	function averageSubject($student, $subject, $period) {
-		$sections = db('SELECT `id`, `points` FROM `section` WHERE `subject` = ?', $subject);
+		$sections = db('SELECT "id", "points" FROM "section" WHERE "subject" = ?', $subject);
 		$points = 0;
 		$possible = 0;
 		foreach($sections as $section) {
@@ -84,7 +84,7 @@
 	
 	function thisPeriod() {
 		$today = date("Y-m-d");
-		return db1('SELECT `id` FROM `period` WHERE `first` <= ? AND `last` >= ?', $today, $today)->id;
+		return db1('SELECT "id" FROM "period" WHERE "first" <= ? AND "last" >= ?', $today, $today)->id;
 	}
 	
 	if(!empty($_POST['api'])) {

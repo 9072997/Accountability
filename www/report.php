@@ -1,11 +1,11 @@
 <?php
 	include_once('share.inc.php');
-	$student = db1('SELECT `id`, `class`, `name` FROM `student` WHERE `code` = ?', $_GET['code']);
+	$student = db1('SELECT "id", "class", "name" FROM "student" WHERE "code" = ?', $_GET['code']);
 	if(empty($student)) {
 		header('Location: login.php?error');
 		die('<a href="login.php?error">Redirect</a>');
 	}
-	$subjects = db('SELECT `id`, `name` FROM `subject` WHERE `class` = ?', $student->class);
+	$subjects = db('SELECT "id", "name" FROM "subject" WHERE "class" = ?', $student->class);
 ?>
 <!DOCTYPE html> 
 <html>
@@ -28,7 +28,7 @@
 			<div data-role="content">
 				<div data-role="collapsible-set">
 					<?php
-						$periods = db('SELECT `id`, `first`, `last` FROM `period` WHERE `id` IN (SELECT `period` FROM `assignment` WHERE `section` IN (SELECT `id` FROM `subject` WHERE `class` = ?))', $student->class);
+						$periods = db('SELECT "id", "first", "last" FROM "period" WHERE "id" IN (SELECT "period" FROM "assignment" WHERE "section" IN (SELECT "id" FROM "subject" WHERE "class" = ?))', $student->class);
 						foreach($periods as $period) {
 							echo "
 								<div data-role=\"collapsible\">

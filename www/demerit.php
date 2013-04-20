@@ -4,10 +4,10 @@
 	if(empty($_GET['id'])) {
 		$studentId = $_GET['student'];
 	} else {
-		$demerit = db1('SELECT `student`, `date`, `note`, `points` FROM `demerit` WHERE `id` = ?', $_GET['id']);
+		$demerit = db1('SELECT "student", "date", "note", "points" FROM "demerit" WHERE "id" = ?', $_GET['id']);
 		$studentId = $demerit->student;
 	}
-	$student = db1('SELECT `name` FROM `student` WHERE `id` = ?', $studentId);
+	$student = db1('SELECT "name" FROM "student" WHERE "id" = ?', $studentId);
 	$title = (empty($_GET['id']) ? 'New ' : '') . "Demerit For $student->name";
 ?>
 <!DOCTYPE html> 

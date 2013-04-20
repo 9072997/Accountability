@@ -1,8 +1,8 @@
 <?php
 	include_once('share.inc.php');
 	include_once('auth.inc.php');
-	$subject = db1('SELECT `class`,`name` FROM `subject` WHERE `id` = ?', $_GET['id']);
-	$title = "$subject->name (Class Of " . db1('SELECT `graduate` from `class` WHERE `id` = ?', $subject->class)->graduate . ')';
+	$subject = db1('SELECT "class","name" FROM "subject" WHERE "id" = ?', $_GET['id']);
+	$title = "$subject->name (Class Of " . db1('SELECT "graduate" from "class" WHERE "id" = ?', $subject->class)->graduate . ')';
 ?>
 <!DOCTYPE html> 
 <html>
@@ -24,7 +24,7 @@
 			<div data-role="content">
 				<ul data-role="listview" data-filter="true">
 					<?php
-						$sections = db('SELECT `id`, `name`, `points` FROM `section` WHERE `subject` = ?', $_GET['id']);
+						$sections = db('SELECT "id", "name", "points" FROM "section" WHERE "subject" = ?', $_GET['id']);
 						foreach($sections as $section) {
 							echo "
 								<li data-role=\"fieldcontain\">

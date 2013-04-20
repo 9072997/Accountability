@@ -21,7 +21,7 @@
 			<div data-role="content">
 				<ul data-role="listview" data-filter="true">
 					<?php
-						$students = db('SELECT `id`, `name` FROM `student`');
+						$students = db('SELECT "id", "name" FROM "student"');
 						foreach($students as $student) {
 							echo "
 								<li>

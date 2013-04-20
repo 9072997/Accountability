@@ -1,9 +1,9 @@
 <?php
 	include_once('share.inc.php');
 	include_once('auth.inc.php');
-	$assignment = db1('SELECT `section`, `name`, `note`, `points` FROM `assignment` WHERE `id` = ?', $_GET['id']);
-	$class = db1('SELECT `class` FROM `subject` WHERE `id` = (SELECT `subject` FROM `section` WHERE `id` = ?)', $assignment->section)->class;
-	$students = db('SELECT `id`, `name` FROM `student` WHERE `class` = ?', $class);
+	$assignment = db1('SELECT "section", "name", "note", "points" FROM "assignment" WHERE "id" = ?', $_GET['id']);
+	$class = db1('SELECT "class" FROM "subject" WHERE "id" = (SELECT "subject" FROM "section" WHERE "id" = ?)', $assignment->section)->class;
+	$students = db('SELECT "id", "name" FROM "student" WHERE "class" = ?', $class);
 	$title = $assignment->name;
 ?>
 <!DOCTYPE html> 
@@ -27,7 +27,7 @@
 				<ul data-role="listview" data-filter="true">
 					<?php
 						foreach($students as $student) {
-							$grade = db1('SELECT `id`, `points` FROM `grade` WHERE `assignment` = ? AND `student` = ?', $_GET['id'], $student->id);
+							$grade = db1('SELECT "id", "points" FROM "grade" WHERE "assignment" = ? AND "student" = ?', $_GET['id'], $student->id);
 							if(empty($grade)) {
 								$id = mt_rand();
 								echo "
@@ -54,10 +54,10 @@
 						<label for="section">Section</label>
 						<select name="section" id="section">
 							<?php
-								$subjects = db('SELECT `id`, `name` FROM `subject` WHERE `class` = ?', $class);
+								$subjects = db('SELECT "id", "name" FROM "subject" WHERE "class" = ?', $class);
 								foreach($subjects as $subject) {
 									echo "<optgroup label=\"$subject->name\">";
-									$sections = db('SELECT `id`, `name` FROM `section` WHERE `subject` = ?', $subject->id);
+									$sections = db('SELECT "id", "name" FROM "section" WHERE "subject" = ?', $subject->id);
 									foreach($sections as $section) {
 										if($section->id == $assignment->section) {
 											echo "<option value=\"$section->id\" selected=\"selected\">$subject->name - $section->name</option>";

@@ -16,23 +16,23 @@
 	<body onload="window.print()"> 
 		<?php
 			if(empty($_GET['id'])) {
-				$students = db('SELECT `id`, `class`, `name`, `code` FROM `student`');
+				$students = db('SELECT "id", "class", "name", "code" FROM "student"');
 			} else {
-				$students = db('SELECT `id`, `name`, `code` FROM `student` WHERE `class` = ?', $_GET['id']);
+				$students = db('SELECT "id", "name", "code" FROM "student" WHERE "class" = ?', $_GET['id']);
 				$class = $_GET['id'];
 			}
 			foreach($students as $student) {
 				if(empty($_GET['id'])) {
 					$class = $student->class;
 				}
-				$period = db1('SELECT `first`, `last` FROM `period` WHERE `id` = ?', thisPeriod());
+				$period = db1('SELECT "first", "last" FROM "period" WHERE "id" = ?', thisPeriod());
 				echo "
 					<div class=\"page\">
 						<h2>$student->name</h2>
 						<h3>Grades: $period->first - $period->last</h3>
 						<ul>
 				";
-				$subjects = db('SELECT `id`, `name` FROM `subject` WHERE `class` = ?', $class);
+				$subjects = db('SELECT "id", "name" FROM "subject" WHERE "class" = ?', $class);
 				foreach($subjects as $subject) {
 					$percentage = round(averageSubject($student->id, $subject->id, thisPeriod()) * 100);
 					echo "
@@ -41,7 +41,7 @@
 						</li>
 					";
 				}
-				$demerits = db('SELECT `note`, `date`, `points` FROM `demerit` WHERE `student` = ?', $student->id);
+				$demerits = db('SELECT "note", "date", "points" FROM "demerit" WHERE "student" = ?', $student->id);
 				echo "</ul>";
 				if(empty($demerits)) {
 					echo "<h3>Demerits</h3>None";
@@ -61,7 +61,7 @@
 				}
 				if(empty($student->code)) {
 					$code = getHumanPassword();
-					db0('UPDATE `student` SET `code` = ? WHERE `id` = ?', $code, $student->id);
+					db0('UPDATE "student" SET "code" = ? WHERE "id" = ?', $code, $student->id);
 				} else {
 					$code = $student->code;
 				}

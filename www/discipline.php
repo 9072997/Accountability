@@ -1,6 +1,6 @@
 <?php
 	include_once('share.inc.php');
-	$student = db1('SELECT `id`, `name` FROM `student` WHERE `code` = ?', $_GET['code']);
+	$student = db1('SELECT "id", "name" FROM "student" WHERE "code" = ?', $_GET['code']);
 ?>
 <!DOCTYPE html> 
 <html>
@@ -23,7 +23,7 @@
 			<div data-role="content">
 				<ul data-role="listview" data-filter="true">
 					<?php
-						$demerits = db('SELECT `id`, `date`, `note`, `points` FROM `demerit` WHERE `student` = ?', $student->id);
+						$demerits = db('SELECT "id", "date", "note", "points" FROM "demerit" WHERE "student" = ?', $student->id);
 						foreach($demerits as $demerit) {
 							echo "
 								<li>

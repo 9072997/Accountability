@@ -1,7 +1,7 @@
 <?php
 	include_once('share.inc.php');
 	include_once('auth.inc.php');
-	$student = db1('SELECT `class`, `name`, `code` FROM `student` WHERE `id` = ?', $_GET['id']);
+	$student = db1('SELECT "class", "name", "code" FROM "student" WHERE "id" = ?', $_GET['id']);
 ?>
 <!DOCTYPE html> 
 <html>
@@ -20,7 +20,7 @@
 				<h1><?php echo $student->name; ?> (<?php
 					if(empty($student->code)) {
 						$code = getHumanPassword();
-						db0('UPDATE `student` SET `code` = ? WHERE `id` = ?', $code, $_GET['id']);
+						db0('UPDATE "student" SET "code" = ? WHERE "id" = ?', $code, $_GET['id']);
 					} else {
 						$code = $student->code;
 					}
@@ -32,15 +32,15 @@
 			<div data-role="content">
 				<ul data-role="listview" data-filter="true">
 					<?php
-						$subjects = db('SELECT `id`, `name` FROM `subject` WHERE `class` = ?', $student->class);
+						$subjects = db('SELECT "id", "name" FROM "subject" WHERE "class" = ?', $student->class);
 						foreach($subjects as $subject) {
-							$sections = db('SELECT `id`, `name` FROM `section` WHERE `subject` = ?', $subject->id);
+							$sections = db('SELECT "id", "name" FROM "section" WHERE "subject" = ?', $subject->id);
 							foreach($sections as $section) {
-								$assignments = db('SELECT `id`, `name`, `points` FROM `assignment` WHERE `section` = ? AND `period` = ?', $section->id, thisPeriod());
+								$assignments = db('SELECT "id", "name", "points" FROM "assignment" WHERE "section" = ? AND "period" = ?', $section->id, thisPeriod());
 								if(count($assignments)) {
 									echo "<li data-role=\"list-divider\">$subject->name - $section->name</li>";
 									foreach($assignments as $assignment) {
-										$grade = db1('SELECT `id`, `points` FROM `grade` WHERE `assignment` = ? AND `student` = ?', $assignment->id, $_GET['id']);
+										$grade = db1('SELECT "id", "points" FROM "grade" WHERE "assignment" = ? AND "student" = ?', $assignment->id, $_GET['id']);
 										if(empty($grade)) {
 											echo "<li><a href=\"grade.php?assignment=$assignment->id&student={$_GET['id']}&source=student.php?id={$_GET['id']}\" data-rel=\"dialog\" data-prefetch>$assignment->name</a></li>";
 										} else {

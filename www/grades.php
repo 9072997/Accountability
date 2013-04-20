@@ -1,7 +1,7 @@
 <?php
 	include_once('share.inc.php');
 	include_once('login.inc.php'); //because the login form submits to here
-	$student = db1('SELECT `id`, `class`, `name` FROM `student` WHERE `code` = ?', $_GET['code']);
+	$student = db1('SELECT "id", "class", "name" FROM "student" WHERE "code" = ?', $_GET['code']);
 	if(empty($student)) {
 		header('Location: login.php?error');
 		die('<a href="login.php?error">Redirect</a>');
@@ -28,15 +28,15 @@
 			<div data-role="content">
 				<ul data-role="listview" data-filter="true">
 					<?php
-						$subjects = db('SELECT `id`, `name` FROM `subject` WHERE `class` = ?', $student->class);
+						$subjects = db('SELECT "id", "name" FROM "subject" WHERE "class" = ?', $student->class);
 						foreach($subjects as $subject) {
-							$sections = db('SELECT `id`, `name`, `points` FROM `section` WHERE `subject` = ?', $subject->id);
+							$sections = db('SELECT "id", "name", "points" FROM "section" WHERE "subject" = ?', $subject->id);
 							foreach($sections as $section) {
-								$assignments = db('SELECT `id`, `note`, `name`, `points` FROM `assignment` WHERE `section` = ? AND `period` = ?', $section->id, thisPeriod());
+								$assignments = db('SELECT "id", "note", "name", "points" FROM "assignment" WHERE "section" = ? AND "period" = ?', $section->id, thisPeriod());
 								if(count($assignments)) {
 									echo "<li data-role=\"list-divider\">$subject->name - $section->name (Weight: $section->points)</li>";
 									foreach($assignments as $assignment) {
-										$grade = db1('SELECT `id`, `note`, `points` FROM `grade` WHERE `assignment` = ? AND `student` = ?', $assignment->id, $student->id);
+										$grade = db1('SELECT "id", "note", "points" FROM "grade" WHERE "assignment" = ? AND "student" = ?', $assignment->id, $student->id);
 										if(empty($grade)) {
 											if(empty($assignment->note)) {
 												echo "<li>$assignment->name</li>";

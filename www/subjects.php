@@ -1,7 +1,7 @@
 <?php
 	include_once('share.inc.php');
 	include_once('auth.inc.php');
-	$title = $title = 'Class of ' . db1('SELECT `graduate` from `class` WHERE `id` = ?', $_GET['id'])->graduate;
+	$title = $title = 'Class of ' . db1('SELECT "graduate" from "class" WHERE "id" = ?', $_GET['id'])->graduate;
 ?>
 <!DOCTYPE html> 
 <html>
@@ -23,7 +23,7 @@
 			<div data-role="content">
 				<ul data-role="listview" data-filter="true">
 					<?php
-						$subjects = db('SELECT `id`, `name` FROM `subject` WHERE `class` = ?', $_GET['id']);
+						$subjects = db('SELECT "id", "name" FROM "subject" WHERE "class" = ?', $_GET['id']);
 						foreach($subjects as $subject) {
 							echo "
 								<li>

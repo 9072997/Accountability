@@ -4,14 +4,14 @@
 	if(empty($_GET['id'])) {
 		$assignmentId = $_GET['assignment'];
 		$studentId = $_GET['student'];
-		$grade = db1('SELECT `note`, `points` FROM `grade` WHERE `assignment` = ? AND `student` = ?', $assignmentId, $studentId);
+		$grade = db1('SELECT "note", "points" FROM "grade" WHERE "assignment" = ? AND "student" = ?', $assignmentId, $studentId);
 	} else {
-		$grade = db1('SELECT `assignment`, `student`, `note`, `points` FROM `grade` WHERE `id` = ?', $_GET['id']);
+		$grade = db1('SELECT "assignment", "student", "note", "points" FROM "grade" WHERE "id" = ?', $_GET['id']);
 		$assignmentId = $grade->assignment;
 		$studentId = $grade->student;
 	}
-	$assignment = db1('SELECT `name`, `points` FROM `assignment` WHERE `id` = ?', $assignmentId);
-	$student = db1('SELECT `id`, `name` FROM `student` WHERE `id` = ?', $studentId);
+	$assignment = db1('SELECT "name", "points" FROM "assignment" WHERE "id" = ?', $assignmentId);
+	$student = db1('SELECT "id", "name" FROM "student" WHERE "id" = ?', $studentId);
 	$title = "$student->name - $assignment->name";
 ?>
 <!DOCTYPE html> 

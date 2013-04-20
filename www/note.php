@@ -1,13 +1,13 @@
 <?php
 	include_once('share.inc.php');
-	$student = db1('SELECT `id` FROM `student` WHERE `code` = ?', $_GET['code']);
+	$student = db1('SELECT "id" FROM "student" WHERE "code" = ?', $_GET['code']);
 	if(empty($_GET['id'])) {
 		$assignmentId = $_GET['assignment'];
 	} else {
-		$grade = db1('SELECT `assignment`, `note` FROM `grade` WHERE `id` = ? AND `student` = ?', $_GET['id'], $student->id);
+		$grade = db1('SELECT "assignment", "note" FROM "grade" WHERE "id" = ? AND "student" = ?', $_GET['id'], $student->id);
 		$assignmentId = $grade->assignment;
 	}
-	$assignment = db1('SELECT `name`, `note` FROM `assignment` WHERE `id` = ?', $assignmentId);
+	$assignment = db1('SELECT "name", "note" FROM "assignment" WHERE "id" = ?', $assignmentId);
 ?>
 <!DOCTYPE html> 
 <html>

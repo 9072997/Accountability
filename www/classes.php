@@ -1,7 +1,7 @@
 <?php
 	include_once('share.inc.php');
 	include_once('auth.inc.php');
-	$classes = db('SELECT `id`, `graduate` FROM `class`');
+	$classes = db('SELECT "id", "graduate" FROM "class"');
 ?>
 <!DOCTYPE html> 
 <html>

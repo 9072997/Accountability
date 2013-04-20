@@ -1,8 +1,8 @@
 <?php
 	include_once('share.inc.php');
 	include_once('auth.inc.php');
-	$subjects = db('SELECT `id`, `name` FROM `subject` WHERE `class` = ?', $_GET['id']);
-	$title = 'Class of ' . db1('SELECT `graduate` from `class` WHERE `id` = ?', $_GET['id'])->graduate;
+	$subjects = db('SELECT "id", "name" FROM "subject" WHERE "class" = ?', $_GET['id']);
+	$title = 'Class of ' . db1('SELECT "graduate" from "class" WHERE "id" = ?', $_GET['id'])->graduate;
 ?>
 <!DOCTYPE html> 
 <html>
@@ -37,7 +37,7 @@
 					</thead>
 					<tbody>
 						<?php
-							$students = db('SELECT `id`, `name` FROM `student` WHERE `class` = ?', $_GET['id']);
+							$students = db('SELECT "id", "name" FROM "student" WHERE "class" = ?', $_GET['id']);
 							foreach($students as $student) {
 								echo "
 									<tr>
