@@ -8,7 +8,7 @@
 		} else {
 			foreach(array('assignment', 'student', 'note', 'points') as $pram) {
 				if(isset($_POST[$pram])) {
-					db0("UPDATE "grade" SET \"$pram\" = ? WHERE "id" = ?", post($pram), $_POST['id']);
+					db0("UPDATE \"grade\" SET \"$pram\" = ? WHERE \"id\" = ?", post($pram), $_POST['id']);
 				}
 			}
 		}

@@ -42,7 +42,7 @@
 								echo "
 									<tr>
 										<td>
-											<a href=\"student.php?id=$student->id\" data-role=\"button\" data-dom-cache="false">$student->name</a>
+											<a href=\"student.php?id=$student->id\" data-role=\"button\" data-dom-cache=\"false\">$student->name</a>
 										</td>
 								";
 								foreach($subjects as $subject) {

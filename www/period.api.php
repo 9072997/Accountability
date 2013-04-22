@@ -8,7 +8,7 @@
 		} else {
 			foreach(array('first', 'last') as $pram) {
 				if(isset($_POST[$pram])) {
-					db0("UPDATE "period" SET \"$pram\" = ? WHERE "id" = ?", post($pram), $_POST['id']);
+					db0("UPDATE \"period\" SET \"$pram\" = ? WHERE \"id\" = ?", post($pram), $_POST['id']);
 				}
 			}
 		}

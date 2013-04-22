@@ -8,7 +8,7 @@
 		} else {
 			foreach(array('subject', 'name', 'points') as $pram) {
 				if(isset($_POST[$pram])) {
-					db0("UPDATE "section" SET \"$pram\" = ? WHERE "id" = ?", post($pram), $_POST['id']);
+					db0("UPDATE \"section\" SET \"$pram\" = ? WHERE \"id\" = ?", post($pram), $_POST['id']);
 				}
 			}
 		}
