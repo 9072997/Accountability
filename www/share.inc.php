@@ -20,7 +20,7 @@
 		if(!isset($dbQueries[$sql])) {
 			$dbQueries[$sql] = $dbObject->prepare($sql);
 		}
-		$dbQueries[$sql]->execute($prams) or die($dbQueries[$sql]->errorInfo()[2]);
+		$dbQueries[$sql]->execute($prams);
 		return $dbQueries[$sql];
 	}
 	
