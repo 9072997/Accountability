@@ -34,7 +34,7 @@
 	function db0($sql) {
 		$prams = func_get_args();
 		array_shift($prams);
-		$query = dbQuery($sql, $prams);
+		dbQuery($sql, $prams);
 	}
 	
 	function db1($sql) {
